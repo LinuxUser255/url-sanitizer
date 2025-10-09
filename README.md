@@ -54,10 +54,14 @@ x86_64 Linux system without external library dependencies.
    cd url-sanitizer
   ```
 
+<br>
+
 2. **Add the `musl` Target**:
    ```bash
    rustup target add x86_64-unknown-linux-musl
    ```
+
+<br>
 
 3. **Build the Static Binary**:
    Compile in release mode for an optimized, standalone binary:
@@ -66,6 +70,9 @@ x86_64 Linux system without external library dependencies.
    ```
    The binary will be at `target/x86_64-unknown-linux-musl/release/url-sanitizer`.
 
+
+<br>
+
 4. **Verify Static Linking**:
    Ensure the binary has no dynamic dependencies:
    ```bash
@@ -73,11 +80,16 @@ x86_64 Linux system without external library dependencies.
    ```
    Expected output: `statically linked` or `not a dynamic executable`.
 
+
+<br>
+
 5. **Optional: Strip the Binary**:
    Reduce binary size by removing debug symbols:
    ```bash
    strip target/x86_64-unknown-linux-musl/release/url-sanitizer
    ```
+
+<br>
 
 6. **Install Globally**:
    Move the binary to `/usr/local/bin` for system-wide access:
@@ -88,6 +100,8 @@ x86_64 Linux system without external library dependencies.
    ```bash
    which url-sanitizer
    ```
+
+<br>
 
 7. **Test the Binary**:
    Run the tool to ensure it works:
