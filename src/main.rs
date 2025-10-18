@@ -1,10 +1,9 @@
-/*
- URL link sanitizer
- Remove the source identifiers from the URL.
- Example:
- https://youtu.be/zfb1y8yn8QI?si=k5puuw5JPpjnzmMm
- Remove everything after the ? symbol.
-*/
+///  URL link sanitizer
+///  Remove the source identifiers from the URL.
+///  Example:
+///  https://youtu.be/zfb1y8yn8QI?si=k5puuw5JPpjnzmMm
+///  Remove everything after the ? symbol
+
 use clap::Parser;
 
 #[derive(Parser, Debug)]
