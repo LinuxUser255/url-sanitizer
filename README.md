@@ -11,9 +11,15 @@
 
 
 ## Features
-- Sanitizes URLs (e.g., removes tracking parameters or normalizes formats).
-- Fast execution with Rust's performance.
-- Portable, statically linked binary for easy distribution.
+- **Redirect URL Detection**: Automatically detects and follows redirect URLs from platforms like YouTube, Google, Facebook, and Twitter
+- **Smart URL Extraction**: Extracts the actual destination URL from redirect parameters (e.g., `q`, `url`, `dest`)
+- **Tracking Parameter Removal**: Removes common tracking parameters including:
+  - UTM parameters (`utm_source`, `utm_medium`, `utm_campaign`, etc.)
+  - Social media trackers (`fbclid`, `gclid`, `msclkid`)
+  - Platform-specific trackers (`si` for YouTube, `ref`, `source`, etc.)
+- **Recursive Processing**: Handles nested redirects and sanitizes extracted URLs
+- Fast execution with Rust's performance
+- Portable, statically linked binary for easy distribution
 
 ## Prerequisites - be Sure to have  musl-tools
 To build and install `url-sanitizer` on a Debian system, ensure the following are installed:
@@ -126,12 +132,26 @@ Options:
 
 ```
 
-## Example:
-```bash
+## Examples:
 
+### Simple YouTube link with tracking:
+```bash
 url-sanitizer --url https://youtu.be/gW464nWLdAs\?si\=TAZ3qCA1503uB__t
 Sanitized URL: https://youtu.be/gW464nWLdAs
+```
 
+### Complex YouTube redirect:
+```bash
+url-sanitizer --url 'https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhq...&q=https%3A%2F%2Fopenart.ai%2Fhome%3Fref%3Daitanalopez&v=fxiDS2C9XYA'
+# Output: https://openart.ai/home
+# (Extracts the actual URL from the redirect and removes the 'ref' tracking parameter)
+```
+
+### URL with UTM parameters:
+```bash
+url-sanitizer --url 'https://example.com/page?utm_source=newsletter&utm_medium=email&id=123'
+# Output: https://example.com/page?id=123
+# (Preserves the 'id' parameter while removing UTM tracking)
 ```
 
 <br>
